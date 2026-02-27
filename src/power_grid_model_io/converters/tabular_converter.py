@@ -384,10 +384,9 @@ class TabularConverter(BaseConverter[TabularData]):
             if isinstance(item, dict) and len(item) == 1 and "optional_extra" in item:
                 # This is an optional_extra section - we'll process it later
                 pass
-            else:
-                # This is a regular column
-                if isinstance(item, str):
-                    regular_columns.add(item)
+            # This is a regular column
+            elif isinstance(item, str):
+                regular_columns.add(item)
 
         # Now process optional_extra sections and remove duplicates
         final_list = []
