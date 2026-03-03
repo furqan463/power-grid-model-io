@@ -1016,7 +1016,7 @@ def test_output_line_3ph(converter):
         converter._get_pp_ids.assert_has_calls(
             [
                 call("line", mock_pgm_array["X"], name=None),
-                call("line", mock_pgm_array["X"], name="asym_line"),
+                call("line", mock_pgm_array["X"], name="asym"),
             ]
         )
 

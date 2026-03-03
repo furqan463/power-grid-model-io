@@ -2070,7 +2070,7 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
             i_to = (pgm_output_lines["p_to"] + 1j * pgm_output_lines["q_to"]) / u_complex.iloc[to_nodes, :]
 
             loss_params = get_loss_params_3ph()
-            name = "asym_line" if line_type == ComponentType.asym_line else None
+            name = "asym" if line_type == ComponentType.asym_line else None
             output_lines_3ph = pd.DataFrame(
                 columns=[
                     "p_a_from_mw",
