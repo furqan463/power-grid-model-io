@@ -10,7 +10,7 @@ import math
 import structlog
 from power_grid_model import WindingType
 
-from power_grid_model_io.functions import get_winding
+from power_grid_model_io.functions._functions import get_winding
 from power_grid_model_io.utils.parsing import parse_pvs_efficiency_type, parse_trafo3_connection, parse_trafo_connection
 
 _LOG = structlog.get_logger(__file__)
@@ -33,7 +33,7 @@ def reactive_power(p: float, cos_phi: float) -> float:
     return p * math.sqrt(1 - cos_phi**2) / cos_phi
 
 
-def power_wind_speed(  # noqa: PLR0913  # pylint: disable=too-many-arguments,too-many-positional-arguments
+def power_wind_speed(  # noqa: PLR0913, PLR0917  # pylint: disable=too-many-arguments,too-many-positional-arguments
     p_nom: float,
     wind_speed: float,
     cut_in_wind_speed: float = 3.0,
