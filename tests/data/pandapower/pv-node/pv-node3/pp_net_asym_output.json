@@ -1566,7 +1566,7 @@
     "res_gen_3ph": {
       "_module": "pandas.core.frame",
       "_class": "DataFrame",
-      "_object": "{\"columns\":[\"p_mw\",\"q_mvar\"],\"index\":[0],\"data\":[[70.0,33.16588271275553]]}",
+      "_object": "{\"columns\":[\"p_a_mw\",\"q_a_mvar\",\"p_b_mw\",\"q_b_mvar\",\"p_c_mw\",\"q_c_mvar\"],\"index\":[0],\"data\":[[23.33333333333333,11.055294237585177,23.33333333333333,11.055294237585177,23.33333333333333,11.055294237585177]]}",
       "orient": "split",
       "dtype": {
         "p_mw": "float64",
