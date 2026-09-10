@@ -2547,7 +2547,7 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
 
         self.pp_output_data[_PpTable.res_asymmetric_load_3ph] = pp_asym_output_loads_3ph
 
-    def _pp_asym_generators_output(
+    def _pp_asym_generators_output_3ph(
         self,
         pp_output_table: Literal[
             _PpTable.res_gen_3ph, _PpTable.res_asymmetric_sgen_3ph
@@ -2610,10 +2610,10 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
         self.pp_output_data[pp_output_table] = pp_output_generators_3ph
 
     def _pp_gens_output_3ph(self):
-        self._pp_asym_generators_output(_PpTable.res_gen_3ph)
+        self._pp_asym_generators_output_3ph(_PpTable.res_gen_3ph)
 
     def _pp_asym_gens_output_3ph(self):
-        self._pp_asym_generators_output(_PpTable.res_asymmetric_sgen_3ph)
+        self._pp_asym_generators_output_3ph(_PpTable.res_asymmetric_sgen_3ph)
 
     def _generate_ids(self, pp_table: str, pp_idx: pd.Index, name: str | None = None) -> np.ndarray:
         """
