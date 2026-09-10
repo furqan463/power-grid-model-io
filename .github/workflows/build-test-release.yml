@@ -32,18 +32,18 @@ jobs:
         uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
 
       - name: Set PyPI version
-        uses: PowerGridModel/pgm-version-bump@74f9102bc2d73628702c4131b63a5f6bc8b12178 # v0.1.7
+        uses: PowerGridModel/pgm-version-bump@dead704b430f4bf42fa876110f18c15597259b0e # v0.1.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: |
-          cat PYPI_VERSION
+          cat VERSION
           uv build --sdist --no-create-gitignore --out-dir wheelhouse .
 
       - name: Save version
         id: version
-        run: echo "version=$(cat PYPI_VERSION)" >> $GITHUB_OUTPUT
+        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
 
       - name: Store built wheel file
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
