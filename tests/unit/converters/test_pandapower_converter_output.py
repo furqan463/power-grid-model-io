@@ -1129,10 +1129,10 @@ def test_output_sgens_3ph(converter):
 
     with patch("power_grid_model_io.converters.pandapower_converter.pd.DataFrame") as mock_pp_df:
         # Act
-        converter._pp_sym_generators_output_3ph()
+        converter._pp_sgens_output_3ph()
 
         # initialization
-        converter._get_pp_ids.assert_called_once_with(idx_table, ANY, idx_name)
+        converter._get_pp_ids.assert_called_once_with(_PpTable.sgen, ANY)
 
         # retrieval
         mock_pgm_array.__getitem__.assert_any_call(AT.id)
