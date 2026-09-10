@@ -2333,21 +2333,21 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
         ):
             return
 
-        sym_gen_pgm_idx = self._get_pgm_ids(pp_table=_PpTable.sgen)
+        pgm_idx_sym_gens = self._get_pgm_ids(pp_table=_PpTable.sgen)
 
-        pgm_output_sgen_3ph = self.pgm_output_data[ComponentType.sym_gen]
+        pgm_output_sym_gens = self.pgm_output_data[ComponentType.sym_gen]
 
-        pp_output_sgen_3ph = pd.DataFrame(
+        pp_output_sgens = pd.DataFrame(
             columns=[_PpAttr.p_mw, _PpAttr.q_mvar],
-            index=pgm_output_sgen_3ph[AttributeType.id],
+            index=pgm_output_sym_gens[AttributeType.id],
         )
-        pp_output_sgen_3ph[_PpAttr.p_mw] = np.sum(pgm_output_sgen_3ph[AttributeType.p], axis=1) * 1e-6
-        pp_output_sgen_3ph[_PpAttr.q_mvar] = np.sum(pgm_output_sgen_3ph[AttributeType.q], axis=1) * 1e-6
+        pp_output_sgens[_PpAttr.p_mw] = np.sum(pgm_output_sym_gens[AttributeType.p], axis=1) * 1e-6
+        pp_output_sgens[_PpAttr.q_mvar] = np.sum(pgm_output_sym_gens[AttributeType.q], axis=1) * 1e-6
 
-        pp_output_sgen_3ph = pp_output_sgen_3ph.loc[sym_gen_pgm_idx]
-        pp_output_sgen_3ph.index = self._get_pp_ids(_PpTable.sgen, sym_gen_pgm_idx)
+        pp_output_sgens = pp_output_sgens.loc[pgm_idx_sym_gens]
+        pp_output_sgens.index = self._get_pp_ids(_PpTable.sgen, pgm_idx_sym_gens)
 
-        self.pp_output_data[_PpTable.res_sgen_3ph] = pp_output_sgen_3ph
+        self.pp_output_data[_PpTable.res_sgen_3ph] = pp_output_sgens
 
     def _pp_trafos_output_3ph(self):  # noqa: PLR0915  # pylint: disable=too-many-statements
         """

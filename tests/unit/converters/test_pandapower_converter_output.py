@@ -1109,17 +1109,6 @@ def test_output_ext_grids_3ph__bad_input(converter):
         converter._pp_ext_grids_output_3ph()
 
 
-def test_output_sgens_3ph():
-    # Arrange
-    converter = MagicMock()
-
-    # Act
-    PandaPowerConverter._pp_sgens_output_3ph(self=converter)  # type: ignore
-
-    # Assert
-    converter._pp_sym_generators_output_3ph.assert_called_once_with(_PpTable.res_sgen_3ph)
-
-
 def test_output_gens_3ph():
     # Arrange
     converter = MagicMock()
@@ -1131,19 +1120,16 @@ def test_output_gens_3ph():
     converter._pp_sym_generators_output_3ph.assert_called_once_with(_PpTable.res_gen_3ph)
 
 
-@pytest.mark.parametrize("pp_output_table", [_PpTable.res_gen_3ph, _PpTable.res_sgen_3ph])
-def test_output_sym_generators_3ph(converter, pp_output_table):
+def test_output_sgens_3ph(converter):
     # Arrange
     mock_pgm_array = MagicMock()
     converter.pgm_output_data[CT.sym_gen] = mock_pgm_array
-    idx_table = "sgen" if pp_output_table == _PpTable.res_sgen_3ph else "gen"
-    idx_name = None if pp_output_table == _PpTable.res_sgen_3ph else "gen"
-    converter.idx[(idx_table, idx_name)] = pd.Series([0], [0])
-    converter.idx_lookup[(idx_table, idx_name)] = pd.Series([0], [0])
+    converter.idx[(_PpTable.sgen, None)] = pd.Series([0], [0])
+    converter.idx_lookup[(_PpTable.sgen, None)] = pd.Series([0], [0])
 
     with patch("power_grid_model_io.converters.pandapower_converter.pd.DataFrame") as mock_pp_df:
         # Act
-        converter._pp_sym_generators_output_3ph(pp_output_table)
+        converter._pp_sym_generators_output_3ph()
 
         # initialization
         converter._get_pp_ids.assert_called_once_with(idx_table, ANY, idx_name)
@@ -1158,7 +1144,7 @@ def test_output_sym_generators_3ph(converter, pp_output_table):
         mock_pp_df.return_value.__setitem__.assert_any_call(_PpAttr.q_mvar, ANY)
 
         # result
-        converter.pp_output_data.__setitem__.assert_called_once_with(pp_output_table, ANY)
+        converter.pp_output_data.__setitem__.assert_called_once_with(_PpTable.res_sgen_3ph, ANY)
 
 
 def test_output_sgen_3ph__bad_input(converter):
