@@ -1624,6 +1624,7 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
         generator_ids = self._get_pgm_ids(idx_table, name=generator_type)
         pgm_output_sym_generators = self.pgm_output_data[ComponentType.sym_gen]
 
+        # TODO: Furqan, add vm_pu, va_pu for gen
         pp_output_generators = pd.DataFrame(
             columns=[_PpAttr.p_mw, _PpAttr.q_mvar],
             index=pgm_output_sym_generators[AttributeType.id],
@@ -2583,6 +2584,7 @@ class PandaPowerConverter(BaseConverter[PandaPowerData]):
         pp_generator_p_3ph = pgm_output_generators_3ph[AttributeType.p] * 1e-6
         pp_generator_q_3ph = pgm_output_generators_3ph[AttributeType.q] * 1e-6
 
+        # TODO: Furqan, add vm, va columns for gen
         pp_output_generators_3ph = pd.DataFrame(
             columns=[
                 _PpAttr.p_a_mw,
